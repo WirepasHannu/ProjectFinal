@@ -35,17 +35,17 @@ namespace ProjectFinal
                     //Käyttötarkoituksen vaihtoehdot metodeina
                     Console.WriteLine("Use of computer ");
                     Methods.Use();
-                    string aComputerUse = (Console.ReadLine());
+                    int aComputerUse = int.Parse(Console.ReadLine());
 
                     //Muistityppin vaihtoehdot metodeina
                     Console.WriteLine("Storage type: ");
                     Methods.StorageType();
-                    string aStorageType = (Console.ReadLine());
+                    int aStorageType = int.Parse(Console.ReadLine());
 
                     //Käyttöjärjestelmän vaihtoehdot metodeina
                     Console.WriteLine("Operating system: ");
                     Methods.OperatingSystem();
-                    string aComputerOs = (Console.ReadLine());
+                    int aComputerOs = int.Parse(Console.ReadLine());
  
                     Console.WriteLine("Battery Capacity ");
                     int aBatteryCapacity = int.Parse(Console.ReadLine());

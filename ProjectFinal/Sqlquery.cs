@@ -58,7 +58,7 @@ namespace ProjectFinal
 
                     while (computers.Read())
                     {
-                        listLaptop.Add(new Laptop(computers.GetString(0), computers.GetInt32(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetString(4), computers.GetString(5), computers.GetString(6)));
+                        listLaptop.Add(new Laptop(computers.GetString(0), computers.GetInt32(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetInt32(4), computers.GetInt32(5), computers.GetInt32(6)));
                         Console.WriteLine($" {computers.GetString(0)} {computers.GetInt32(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetString(4)} {computers.GetString(5)} {computers.GetString(6)}");
                     }
                 return listLaptop;
@@ -77,8 +77,8 @@ namespace ProjectFinal
 
                     while (computers.Read())
                     {
-                        listDesktop.Add(new Desktop(computers.GetString(0), computers.GetInt32(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetString(4), computers.GetString(5), computers.GetString(6)));
-                        Console.WriteLine($" {computers.GetString(0)} {computers.GetInt32(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetString(4)} {computers.GetString(5)} {computers.GetString(6)}");
+                       // listDesktop.Add(new Desktop(computers.GetString(0), computers.GetInt32(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetString(4), computers.GetString(5), computers.GetString(6)));
+                       // Console.WriteLine($" {computers.GetString(0)} {computers.GetInt32(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetString(4)} {computers.GetString(5)} {computers.GetString(6)}");
                     }
                 return listDesktop;
             }

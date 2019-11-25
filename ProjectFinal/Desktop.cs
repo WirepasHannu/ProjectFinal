@@ -11,9 +11,9 @@ namespace ProjectFinal
                 double _price,
                 int _storageSize,
                 int _batteryCapacity,
-                string _computerUse,
-                string _storageType,
-                string _os) :
+                int _computerUse,
+                int _storageType,
+                int _os) :
             base(_name, _price, _storageSize, _batteryCapacity, _computerUse, _storageType, _os)
         {
         }

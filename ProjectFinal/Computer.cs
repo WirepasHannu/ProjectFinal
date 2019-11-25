@@ -9,9 +9,9 @@ namespace ProjectFinal
         private string _name;
         private double _price;
         private int _storageSize;
-        private string _computerUse;
-        private string _storageType;
-        private string _os;
+        private int _computerUse;
+        private int _storageType;
+        private int _os;
         private int _batteryCapacity;
 
         //Konstruktori 
@@ -20,9 +20,9 @@ namespace ProjectFinal
                 double _price,
                 int _storageSize,
                 int _batteryCapacity,
-                string _computerUse,
-                string _storageType,
-                string _os
+                int _computerUse,
+                int _storageType,
+                int _os
                 )
         {
             Name = _name;
@@ -49,17 +49,17 @@ namespace ProjectFinal
             get { return _storageSize; }
             set { _storageSize = value; }
         }
-        public string ComputerUse
+        public int ComputerUse
         {
             get { return _computerUse; }
             set { _computerUse = value; }
         }
-        public string StorageType
+        public int StorageType
         {
             get { return _storageType; }
             set { _storageType = value; }
         }
-        public string OperatingSystem
+        public int OperatingSystem
         {
             get { return _os; }
             set { _os = value; }
