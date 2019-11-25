@@ -26,10 +26,20 @@ namespace ProjectFinal
             connection.Open();
         }
 
-
         //Lisääminen tietokantaan
-        public static void StoreToSql()
+        public static void StoreToSql(Laptop computer)
         {
+            using (addComputer = new NpgsqlCommand("INSERT INTO computer(name, price, storagesize, storagetypeid, operatingsystemid, useid, batterycapacity)" + "VALUES (@name, @price, @storagesize, @storagetypeid, @operatingsystemid, @useid, @batterycapacity)", connection))
+            {
+                addComputer.Parameters.AddWithValue("name", computer.Name);
+                addComputer.Parameters.AddWithValue("price", computer.Price);
+                addComputer.Parameters.AddWithValue("storagesize", computer.StorageSize);
+                addComputer.Parameters.AddWithValue("storagetypeid", computer.StorageType);
+                addComputer.Parameters.AddWithValue("operatingsystemid", computer.OperatingSystem);
+                addComputer.Parameters.AddWithValue("useid", computer.ComputerUse);
+                addComputer.Parameters.AddWithValue("batterycapacity", computer.BatteryCapacity);
+                addComputer.ExecuteNonQuery();
+            }
         }
         public static void GetFromSql()
         {

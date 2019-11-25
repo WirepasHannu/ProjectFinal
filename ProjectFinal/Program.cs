@@ -8,9 +8,6 @@ namespace ProjectFinal
     {
         static void Main(string[] args)
         {
-            List<Desktop> desktops = new List<Desktop>();
-            List<Laptop> laptops = new List<Laptop>();
-
             //int input switch casen käyttöön
             int input;
 
@@ -53,16 +50,9 @@ namespace ProjectFinal
                     Console.WriteLine("Battery Capacity ");
                     int aBatteryCapacity = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine($"nimi : {aBatteryCapacity}");
-
-                    //Batterycapacityn mukaan lisätään joko listaan Laptop tai Desktop
-                    if (aBatteryCapacity < 0)
-                    {
-                        
-                        laptops.Add(new Laptop(aName, aPrice, aStorageSize, aBatteryCapacity, aComputerUse, aStorageType, aComputerOs));
-                    }
-
-
+                    SqlQuery.Connection();
+                    Laptop computer = new Laptop(aName, aPrice, aStorageSize, aBatteryCapacity, aComputerUse, aStorageType, aComputerOs);                   
+                    SqlQuery.StoreToSql(computer);
 
                     break;
 
