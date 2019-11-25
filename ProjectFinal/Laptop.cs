@@ -7,7 +7,7 @@ namespace ProjectFinal
     class Laptop : Computer
     {
         public Laptop(
-            string _name,
+                string _name,
                 double _price,
                 int _storageSize,
                 int _batteryCapacity,

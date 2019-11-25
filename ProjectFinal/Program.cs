@@ -12,11 +12,11 @@ namespace ProjectFinal
             int input;
 
             //Aloitusvalikko
-            Console.WriteLine(" 1 - Add new Computer ");
-            Console.WriteLine(" 2 - Search a laptop ");
-            Console.WriteLine(" 3 - Search a desktop ");
-            Console.WriteLine(" 4 - Show a list of computers ");
-            Console.WriteLine(" 5 - Quit ");
+            Console.WriteLine(" 1 - Add new Computer "); //OK
+            Console.WriteLine(" 2 - Search a laptop "); //OK
+            Console.WriteLine(" 3 - Search a desktop "); //OK
+            Console.WriteLine(" 4 - Show a list of computers "); //OK
+            Console.WriteLine(" 5 - Quit "); //OK
             input = int.Parse(Console.ReadLine());
 
             switch (input)
@@ -49,36 +49,56 @@ namespace ProjectFinal
  
                     Console.WriteLine("Battery Capacity ");
                     int aBatteryCapacity = int.Parse(Console.ReadLine());
-
+                    //Yhteys tietokantaan
                     SqlQuery.Connection();
+                    //Jos batterycapacity = 0 -> Desktop olio
+                    //Muutoin Laptop
+
                     Laptop computer = new Laptop(aName, aPrice, aStorageSize, aBatteryCapacity, aComputerUse, aStorageType, aComputerOs);                   
                     SqlQuery.StoreToSql(computer);
 
                     break;
 
-                //case 2
-                //break;
+                case 2:
+                    //Laptopin etsiminen SQL:sta
+                    Console.WriteLine("Tietokoneen käyttötarkoitus: ");
+                    Methods.Use();
+                    int use = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Budjetti: ");
+                    int budget = int.Parse(Console.ReadLine());
+                    SqlQuery.Connection();
+                    SqlQuery.GetFromSqlLaptop(use, budget);
+
+                break;
+
+                case 3:
+                    //Desktopin etsiminen SQL:sta
+                    Console.WriteLine("Tietokoneen käyttötarkoitus: ");
+                    Methods.Use();
+                    int Use = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Budjetti: ");
+                    int Budget = int.Parse(Console.ReadLine());
+                    SqlQuery.Connection();
+                    SqlQuery.GetFromsqlDesktop(Use, Budget);
+
+                    break;
 
                 case 4:
+
                     //Yhteys tietokantaan
                     SqlQuery.Connection();
                     //Kannettavien tuonti tietokannasta
                     SqlQuery.GetLaptops();
                     //Desktopien tuonti tietokannasta
                     SqlQuery.GetDesktops();
-
                     break;
 
+                case 5:
+
+                    Environment.Exit(0);
+                    break;
             }
-
-
-
         }
-
-
-
-
-
 
     }
 }

@@ -6,19 +6,26 @@ namespace ProjectFinal
 {
     class ComputersFromSQL
     {
-        private string name;
-        private int price;
-        private int storagesize;
-        private int batterycapacity;
-        private string use;
-        private string storagetype;
-        private string operatingsystem;
+        private int id;
+        private readonly string name;
+        private readonly int price;
+        private readonly int storagesize;
+        private readonly int batterycapacity;
+        private readonly string use;
+        private readonly string storagetype;
+        private readonly string operatingsystem;
 
-        public ComputersFromSQL( string name, int price, int storagesize, int batterycapacity, string use, string storagetype, string operatingsystem )
+        public ComputersFromSQL( int id, string name, int price, int storagesize, int batterycapacity, string use, string storagetype, string operatingsystem )
         {
-
+            this.id = id;
+            this.name = name;
+            this.price = price;
+            this.storagesize = storagesize;
+            this.batterycapacity = batterycapacity;
+            this.use = use;
+            this.storagetype = storagetype;
+            this.operatingsystem = operatingsystem;
         }
-
         public string Name()
         {
             return name;
@@ -46,6 +53,10 @@ namespace ProjectFinal
         public string Operatingsystem()
         {
             return operatingsystem;
+        }
+        public int Id()
+        {
+            return id;
         }
     }
 }

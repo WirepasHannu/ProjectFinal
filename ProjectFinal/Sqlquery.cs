@@ -18,6 +18,7 @@ namespace ProjectFinal
         static private NpgsqlCommand GetAllLaptops = null;
         static private NpgsqlCommand GetAllDesktops = null;
         static private NpgsqlCommand addComputer = null;
+        static private NpgsqlCommand searchComputer = null;
 
         //Connecting to database
         public static void Connection()
@@ -41,35 +42,65 @@ namespace ProjectFinal
                 addComputer.ExecuteNonQuery();
             }
         }
-        public static void GetFromSql()
+        //Tietokannasta laptopin hakeminen
+        public static void GetFromSqlLaptop(int use, int budget)
         {
-            //Tietokannasta hakeminen
+            List<ComputersFromSQL> searchedcomputers = new List<ComputersFromSQL>();
+            using (searchComputer = new NpgsqlCommand($"SELECT computer.id, computer.name,computer.price,computer.storagesize, computer.batterycapacity, computeruse.use, storagetype.storagetype, operatingsystem.operating_system FROM computer LEFT JOIN storagetype on computer.storagetypeid = storagetype.idstoragetype LEFT JOIN computeruse on computer.useid = computeruse.idcomputeruse LEFT JOIN operatingsystem on computer.operatingsystemid = operatingsystem.idoperatingsystem WHERE price < {budget}  AND computer.useid = '{use}' AND batterycapacity > 0;", connection))
+            {
+                searchComputer.Prepare();
+                using (NpgsqlDataReader searchresult = searchComputer.ExecuteReader())
+
+                     while (searchresult.Read())
+                     { 
+                        searchedcomputers.Add(new ComputersFromSQL(searchresult.GetInt16(0), searchresult.GetString(1), searchresult.GetInt32(2), searchresult.GetInt32(3), searchresult.GetInt32(4), searchresult.GetString(5), searchresult.GetString(6), searchresult.GetString(7)));
+                        Console.WriteLine($" {searchresult.GetInt16(0)} {searchresult.GetString(1)} {searchresult.GetInt32(2)} {searchresult.GetInt32(3)} {searchresult.GetInt32(4)} {searchresult.GetString(5)} {searchresult.GetString(6)} {searchresult.GetString(7)}");
+                     }
+            }
+        }
+
+        //Tietokannasta desktopin hakeminen
+            public static void GetFromsqlDesktop(int Use, int Budget)
+        {
+            List<ComputersFromSQL> searchedcomputers = new List<ComputersFromSQL>();
+            using (searchComputer = new NpgsqlCommand($"SELECT computer.id, computer.name,computer.price,computer.storagesize, computer.batterycapacity, computeruse.use, storagetype.storagetype, operatingsystem.operating_system FROM computer LEFT JOIN storagetype on computer.storagetypeid = storagetype.idstoragetype LEFT JOIN computeruse on computer.useid = computeruse.idcomputeruse LEFT JOIN operatingsystem on computer.operatingsystemid = operatingsystem.idoperatingsystem WHERE price < {Budget}  AND computer.useid = '{Use}' AND batterycapacity = 0 OR NULL;", connection))
+            {
+                searchComputer.Prepare();
+                using (NpgsqlDataReader searchresult = searchComputer.ExecuteReader())
+
+                    while (searchresult.Read())
+                    {
+                        searchedcomputers.Add(new ComputersFromSQL(searchresult.GetInt16(0), searchresult.GetString(1), searchresult.GetInt32(2), searchresult.GetInt32(3), searchresult.GetInt32(4), searchresult.GetString(5), searchresult.GetString(6), searchresult.GetString(7)));
+                        Console.WriteLine($" {searchresult.GetInt16(0)} {searchresult.GetString(1)} {searchresult.GetInt32(2)} {searchresult.GetInt32(3)} {searchresult.GetInt32(4)} {searchresult.GetString(5)} {searchresult.GetString(6)} {searchresult.GetString(7)}");
+                    }
+            }
         }
 
         //Kannettavien palauttamien db:sta
-        static public List<Laptop> GetLaptops()
+        //Käytetään luokkaa ComputersFromSQL palauttamiseen
+        static public List<ComputersFromSQL> GetLaptops()
         {
-            List<Laptop> listLaptop = new List<Laptop>();
-            using (GetAllLaptops = new NpgsqlCommand("SELECT computer.name,computer.price,computer.storagesize, computer.batterycapacity, computeruse.use, storagetype.storagetype, operatingsystem.operating_system FROM \"computer\" LEFT JOIN storagetype on computer.storagetypeid = storagetype.idstoragetype LEFT JOIN computeruse on computer.useid = computeruse.idcomputeruse LEFT JOIN operatingsystem on computer.operatingsystemid = operatingsystem.idoperatingsystem WHERE batterycapacity > 0;", connection))
+            List<ComputersFromSQL> listLaptop = new List<ComputersFromSQL>();
+            using (GetAllLaptops = new NpgsqlCommand("SELECT computer.id, computer.name,computer.price,computer.storagesize, computer.batterycapacity, computeruse.use, storagetype.storagetype, operatingsystem.operating_system FROM \"computer\" LEFT JOIN storagetype on computer.storagetypeid = storagetype.idstoragetype LEFT JOIN computeruse on computer.useid = computeruse.idcomputeruse LEFT JOIN operatingsystem on computer.operatingsystemid = operatingsystem.idoperatingsystem WHERE batterycapacity > 0;", connection))
             {
                 GetAllLaptops.Prepare();
-
                 using (NpgsqlDataReader computers = GetAllLaptops.ExecuteReader())
 
                     while (computers.Read())
                     {
-                        listLaptop.Add(new Laptop(computers.GetString(0), computers.GetInt32(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetInt32(4), computers.GetInt32(5), computers.GetInt32(6)));
-                        Console.WriteLine($" {computers.GetString(0)} {computers.GetInt32(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetString(4)} {computers.GetString(5)} {computers.GetString(6)}");
+                        listLaptop.Add(new ComputersFromSQL( computers.GetInt16(0), computers.GetString(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetInt32(4), computers.GetString(5), computers.GetString(6), computers.GetString(7)));
+                        Console.WriteLine($" {computers.GetInt16(0)} {computers.GetString(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetInt32(4)} {computers.GetString(5)} {computers.GetString(6)} {computers.GetString(7)}");
                     }
                 return listLaptop;
             }
         }
         //Desktopien palauttaminen db:sta
-        static public List<Desktop> GetDesktops()
+        //Käytetään luokkaa ComputersFromSQL palauttamiseen
+        static public List<ComputersFromSQL> GetDesktops()
         {
-            List<Desktop> listDesktop = new List<Desktop>();
+            List<ComputersFromSQL> listDesktop = new List<ComputersFromSQL>();
             
-            using (GetAllDesktops = new NpgsqlCommand("SELECT computer.name,computer.price,computer.storagesize, computer.batterycapacity, computeruse.use, storagetype.storagetype, operatingsystem.operating_system FROM \"computer\" LEFT JOIN storagetype on computer.storagetypeid = storagetype.idstoragetype LEFT JOIN computeruse on computer.useid = computeruse.idcomputeruse LEFT JOIN operatingsystem on computer.operatingsystemid = operatingsystem.idoperatingsystem WHERE batterycapacity = 0;", connection))
+            using (GetAllDesktops = new NpgsqlCommand("SELECT computer.id, computer.name,computer.price,computer.storagesize, computer.batterycapacity, computeruse.use, storagetype.storagetype, operatingsystem.operating_system FROM \"computer\" LEFT JOIN storagetype on computer.storagetypeid = storagetype.idstoragetype LEFT JOIN computeruse on computer.useid = computeruse.idcomputeruse LEFT JOIN operatingsystem on computer.operatingsystemid = operatingsystem.idoperatingsystem WHERE batterycapacity = 0;", connection))
             {
                 GetAllDesktops.Prepare();
 
@@ -77,11 +108,12 @@ namespace ProjectFinal
 
                     while (computers.Read())
                     {
-                       // listDesktop.Add(new Desktop(computers.GetString(0), computers.GetInt32(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetString(4), computers.GetString(5), computers.GetString(6)));
-                       // Console.WriteLine($" {computers.GetString(0)} {computers.GetInt32(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetString(4)} {computers.GetString(5)} {computers.GetString(6)}");
+                        listDesktop.Add(new ComputersFromSQL(computers.GetInt16(0), computers.GetString(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetInt32(4), computers.GetString(5), computers.GetString(6), computers.GetString(7)));
+                        Console.WriteLine($" {computers.GetInt16(0)} {computers.GetString(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetInt32(4)} {computers.GetString(5)} {computers.GetString(6)} {computers.GetString(7)}");
                     }
                 return listDesktop;
             }
         }
+        
     }
 }

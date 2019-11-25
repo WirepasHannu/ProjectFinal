@@ -7,7 +7,7 @@ namespace ProjectFinal
     class Desktop : Computer
     {
         public Desktop(
-            string _name,
+                string _name,
                 double _price,
                 int _storageSize,
                 int _batteryCapacity,

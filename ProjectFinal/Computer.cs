@@ -6,6 +6,7 @@ namespace ProjectFinal
 {
     public abstract class Computer
     {
+
         private string _name;
         private double _price;
         private int _storageSize;
