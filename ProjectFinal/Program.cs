@@ -8,10 +8,16 @@ namespace ProjectFinal
     {
         static void Main(string[] args)
         {
-            
-            
+            //Array to store uses of the computer     
+            string[] uses = new string[] { "1 - Business", "2 - Editing", "3 - Basic", "4 - Gaming" };
+            //Array to store different storagetypes
+            string[] storagetypes = new string[] { "1 - HDD", "2 - SSD", "3 - M2 SSD" };
+            //Array to store different operatingsystems
+            string[] operatingsystem = new string[] { "1 - Windows", "2 - IOS", "3 - Else" };
+
             //Int input to be used on switch case
             int input;
+
             double aPrice;
             int aStorageSize;
             int aComputerUse = 0;
@@ -19,7 +25,9 @@ namespace ProjectFinal
             int aComputerOs = 0;
             int aBatteryCapacity;
             int use = 0;
-            int budget = 0;
+            int Use = 0;
+            int budget;
+            int Budget;
 
             //Start menu
             Console.WriteLine(" 1 - Add new Computer "); //OK
@@ -59,7 +67,7 @@ namespace ProjectFinal
                     {
                         while (true)
                         {
-                            Console.WriteLine("Storage size: ");
+                            Console.WriteLine("Storage size in gigabytes: ");
                             try
                             {
                                 aStorageSize = int.Parse(Console.ReadLine());
@@ -76,16 +84,23 @@ namespace ProjectFinal
                     while (true)
                     {
                         Console.WriteLine("Computer use: ");
-                        Methods.Use();
+
+                        //Print different uses from array
+                        foreach (var item in uses)
+                        {
+                            Console.WriteLine(item);
+                        }
                         try
                         {
                             aComputerUse = int.Parse(Console.ReadLine());
                         }
+
                         catch (FormatException ex)
                         {
                             Console.WriteLine(ex);
-                        }                    
-                        if (aComputerUse >= 1 && aComputerUse <= 4)
+                        }
+                        //Program wont allow values that are smaller than one or values that are higher than lenght of the array
+                        if (aComputerUse >= 1 && aComputerUse <= uses.Length)
                         {
                           break;
                         }
@@ -94,7 +109,10 @@ namespace ProjectFinal
                     while (true)
                     {
                         Console.WriteLine("Storage type: ");
-                        Methods.StorageType();
+                        foreach (var item in storagetypes)
+                        {
+                            Console.WriteLine(item);
+                        }
                         try
                         {
                             aStorageType = int.Parse(Console.ReadLine());
@@ -103,7 +121,8 @@ namespace ProjectFinal
                         {
                             Console.WriteLine(ex);
                         }
-                        if (aStorageType >= 1 && aStorageType < 4)
+                        //Program wont allow values that are smaller than one or values that are higher than lenght of the array
+                        if (aStorageType >= 1 && aStorageType <= storagetypes.Length)
                         {
                             break;
                         }
@@ -112,7 +131,11 @@ namespace ProjectFinal
                     while (true)
                     {
                         Console.WriteLine("Operating system: ");
-                        Methods.OperatingSystem();
+                        //Print different operatingsystems
+                        foreach (var item in operatingsystem)
+                        {
+                            Console.WriteLine(item);
+                        }
                         try
                         {
                             aComputerOs = int.Parse(Console.ReadLine());
@@ -121,12 +144,15 @@ namespace ProjectFinal
                         {
                             Console.WriteLine(ex);
                         }
-                        if (aComputerOs >= 1 && aComputerOs < 4)
+                        //Program wont allow values that are smaller than one or values that are higher than lenght of the array
+                        if (aComputerOs >= 1 && aComputerOs < operatingsystem.Length)
                         {
                             break;
                         }
                     }
 
+                    //Asking the batterycapacity
+                    //If computer is desktop -> User must enter 0, else computer is defined as laptop
                     do
                     {
                         while (true)
@@ -168,11 +194,16 @@ namespace ProjectFinal
 
                 //Searching Laptop from the database
                 case 2:
-
+                    //Asking the use 
                     while (true)
                     {
                         Console.WriteLine("Computer use: ");
-                        Methods.Use();
+
+                        //Print different uses from array
+                        foreach (var item in uses)
+                        {
+                            Console.WriteLine(item);
+                        }
                         try
                         {
                         use = int.Parse(Console.ReadLine());
@@ -186,7 +217,7 @@ namespace ProjectFinal
                             break;
                         }
                     }
-
+                    //Asking the budget
                     do
                     {
                         while (true)
@@ -205,34 +236,71 @@ namespace ProjectFinal
                         }
                     } while (budget < 0);
    
-                    //Making connection to database
+                    //Connecting to database
                     SqlQuery.Connection();
-                    //Method called to import and print desktops
+                    //Method called to import and print Laptops that suit to search criteria
                     SqlQuery.GetFromSqlLaptop(use, budget);
 
                 break;
 
                 //Searching Desktop from the database
                 case 3:
-                    Console.WriteLine("Computer use: ");
-                    Methods.Use();
-                    int Use = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Budget: ");
-                    int Budget = int.Parse(Console.ReadLine());
-                    //Making connection to database
+                    //Asking the use
+                    while (true)
+                    {
+                        Console.WriteLine("Computer use: ");
+
+                        //Print different uses from array
+                        foreach (var item in uses)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        try
+                        {
+                            Use = int.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        if (Use >= 1 && Use <= 4)
+                        {
+                            break;
+                        }
+                    }
+
+                    //Asking the budget
+                    do
+                    {
+                        while (true)
+                        {
+                            Console.WriteLine("Budget: ");
+                            try
+                            {
+                                Budget = int.Parse(Console.ReadLine());
+                            }
+                            catch (FormatException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                continue;
+                            }
+                            break;
+                        }
+                    } while (Budget < 0);
+           
+                    //Connecting to database
                     SqlQuery.Connection();
-                    //Method called to import and print desktops
+                    //Method called to import and print Desktops that suit to search criteria
                     SqlQuery.GetFromsqlDesktop(Use, Budget);
 
                 break;
-
-                //Print every computer from the database
+             
                 case 4:
+                    //Print every computer from the database
                     //Connection to database
                     SqlQuery.Connection();
 
                     //Import laptops from the database
-                    Console.WriteLine();
                     Console.WriteLine("All laptops in the database: ");
                     Console.WriteLine();
                     SqlQuery.GetLaptops();
