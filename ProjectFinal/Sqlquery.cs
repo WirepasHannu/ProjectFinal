@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Npgsql;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectFinal
 {
@@ -30,7 +32,7 @@ namespace ProjectFinal
         //Adding Computer to database
         public static void StoreToSql(Laptop computer)
         {
-            using (addComputer = new NpgsqlCommand("INSERT INTO computer(name, price, storagesize, storagetypeid, operatingsystemid, useid, batterycapacity)" + "VALUES (@name, @price, @storagesize, @storagetypeid, @operatingsystemid, @useid, @batterycapacity)", connection))
+            using (addComputer = new NpgsqlCommand("INSERT INTO computer(name, price, storagesize, storagetypeid, operatingsystemid, useid, batterycapacity,date_added, time_added)" + "VALUES (@name, @price, @storagesize, @storagetypeid, @operatingsystemid, @useid, @batterycapacity, @date_added, @time_added)", connection))
             {
                 addComputer.Parameters.AddWithValue("name", computer.Name);
                 addComputer.Parameters.AddWithValue("price", computer.Price);
@@ -39,6 +41,8 @@ namespace ProjectFinal
                 addComputer.Parameters.AddWithValue("operatingsystemid", computer.OperatingSystem);
                 addComputer.Parameters.AddWithValue("useid", computer.ComputerUse);
                 addComputer.Parameters.AddWithValue("batterycapacity", computer.BatteryCapacity);
+                addComputer.Parameters.AddWithValue("date_added", DateTime.Now);
+                addComputer.Parameters.AddWithValue("time_added", DateTime.Now.TimeOfDay);
                 addComputer.ExecuteNonQuery();
             }
         }
@@ -83,7 +87,7 @@ namespace ProjectFinal
 
                     while (computers.Read())
                     {
-                        listLaptop.Add(new Laptop( computers.GetInt16(0), computers.GetString(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetInt32(4), computers.GetString(5), computers.GetString(6), computers.GetString(7)));
+                        listLaptop.Add(new Laptop(computers.GetInt16(0), computers.GetString(1), computers.GetInt32(2), computers.GetInt32(3), computers.GetInt32(4), computers.GetString(5), computers.GetString(6), computers.GetString(7)));
                         Console.WriteLine($" {computers.GetInt16(0)} {computers.GetString(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetInt32(4)} {computers.GetString(5)} {computers.GetString(6)} {computers.GetString(7)}");
                     }
                 return listLaptop;

@@ -18,6 +18,8 @@ namespace ProjectFinal
             int aStorageType = 0;
             int aComputerOs = 0;
             int aBatteryCapacity;
+            int use = 0;
+            int budget = 0;
 
             //Start menu
             Console.WriteLine(" 1 - Add new Computer "); //OK
@@ -166,11 +168,43 @@ namespace ProjectFinal
 
                 //Searching Laptop from the database
                 case 2:
-                    Console.WriteLine("Computer use: ");
-                    Methods.Use();
-                    int use = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Budget: ");
-                    int budget = int.Parse(Console.ReadLine());
+
+                    while (true)
+                    {
+                        Console.WriteLine("Computer use: ");
+                        Methods.Use();
+                        try
+                        {
+                        use = int.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        if (use >= 1 && use <= 4)
+                        {
+                            break;
+                        }
+                    }
+
+                    do
+                    {
+                        while (true)
+                        {
+                            Console.WriteLine("Budget: ");
+                            try
+                            {
+                                budget = int.Parse(Console.ReadLine());
+                            }
+                            catch (FormatException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                continue;
+                            }
+                            break;
+                        }
+                    } while (budget < 0);
+   
                     //Making connection to database
                     SqlQuery.Connection();
                     //Method called to import and print desktops
@@ -208,6 +242,7 @@ namespace ProjectFinal
                     Console.WriteLine("All desktops in the database ");
                     Console.WriteLine();
                     SqlQuery.GetDesktops();
+
                     break;
                 case 5:
                     //Exiting program 
