@@ -15,6 +15,8 @@ namespace ProjectFinal
             int aComputerUse = 0;
             int aStorageType = 0;
             int aComputerOs = 0;
+            int aBatteryCapacity = 0;
+
             //Start menu
             Console.WriteLine(" 1 - Add new Computer "); //OK
             Console.WriteLine(" 2 - Search a laptop "); //OK
@@ -79,7 +81,7 @@ namespace ProjectFinal
                         {
                             Console.WriteLine(ex);
                         }
-                        if (aComputerUse >= 1 && aComputerUse < 4)
+                        if (aComputerUse >= 1 && aComputerUse <= 4)
                         {
                             break;
                         }
@@ -123,8 +125,25 @@ namespace ProjectFinal
                         }
                     }
 
-                    Console.WriteLine("Battery Capacity ");
-                    int aBatteryCapacity = int.Parse(Console.ReadLine());
+                    do
+                    {
+                        while (true)
+                        {
+                            Console.WriteLine("Battery Capacity "); 
+                            try
+                            {
+                                aBatteryCapacity = int.Parse(Console.ReadLine());
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                Console.WriteLine("If computer is desktop, please enter 0 ");
+                                continue;
+                            }
+                            break;
+                        }
+                    } while (aBatteryCapacity < 0);
+
                     //Connecting to database
                     SqlQuery.Connection();
 
