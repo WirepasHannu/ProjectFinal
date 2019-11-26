@@ -4,32 +4,36 @@ using System.Text;
 
 namespace ProjectFinal
 {
-    static class Methods
-    {
-
-
-        //Method to print different uses
-        public static void Use()
-        {
-            Console.WriteLine(" 1 - Business ");
-            Console.WriteLine(" 2 - Editing ");
-            Console.WriteLine(" 3 - Basic ");
-            Console.WriteLine(" 4 - Gaming ");
-        }
+    class Methods
+    { 
+        
         //Method to print storagetypes
         public static void StorageType()
         {
-            Console.WriteLine(" 1 - HDD ");
-            Console.WriteLine(" 2 - SSD ");
-            Console.WriteLine(" 3 - M2 SSD ");
+            string[] storage = new string[] { "1 - HDD", "2 - SSD", "3 - M2 SSD" };
+            foreach (var item in storage)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         //Method to print different operating systems
         public static void OperatingSystem()
         {
-            Console.WriteLine(" 1 - Windows ");
-            Console.WriteLine(" 2 - IOS ");
-            Console.WriteLine(" 3 - Else ");
+            string[] operatingsystem = new string[] { "1 - Windows", "2 - IOS", "3 - Else" };
+            foreach (var item in operatingsystem)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        //Array of different computer uses and values
+        public static void Use()
+        {
+            string[] uses = new string[] { "1 - Business", "2 - Editing", "3 - Basic", "4 - Gaming" };
+            foreach (var item in uses)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

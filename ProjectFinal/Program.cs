@@ -8,6 +8,8 @@ namespace ProjectFinal
     {
         static void Main(string[] args)
         {
+            
+            
             //Int input to be used on switch case
             int input;
             double aPrice;
@@ -15,7 +17,7 @@ namespace ProjectFinal
             int aComputerUse = 0;
             int aStorageType = 0;
             int aComputerOs = 0;
-            int aBatteryCapacity = 0;
+            int aBatteryCapacity;
 
             //Start menu
             Console.WriteLine(" 1 - Add new Computer "); //OK
@@ -55,7 +57,7 @@ namespace ProjectFinal
                     {
                         while (true)
                         {
-                            Console.WriteLine("Storage size ");
+                            Console.WriteLine("Storage size: ");
                             try
                             {
                                 aStorageSize = int.Parse(Console.ReadLine());
@@ -80,10 +82,10 @@ namespace ProjectFinal
                         catch (FormatException ex)
                         {
                             Console.WriteLine(ex);
-                        }
+                        }                    
                         if (aComputerUse >= 1 && aComputerUse <= 4)
                         {
-                            break;
+                          break;
                         }
                     }
 
@@ -91,7 +93,6 @@ namespace ProjectFinal
                     {
                         Console.WriteLine("Storage type: ");
                         Methods.StorageType();
-
                         try
                         {
                             aStorageType = int.Parse(Console.ReadLine());
@@ -110,7 +111,6 @@ namespace ProjectFinal
                     {
                         Console.WriteLine("Operating system: ");
                         Methods.OperatingSystem();
-
                         try
                         {
                             aComputerOs = int.Parse(Console.ReadLine());
@@ -215,6 +215,5 @@ namespace ProjectFinal
                 break;
             }
         }
-
     }
 }
