@@ -6,7 +6,6 @@ namespace ProjectFinal
 {
     public abstract class Computer
     {
-
         private string _name;
         private double _price;
         private int _storageSize;
@@ -16,6 +15,7 @@ namespace ProjectFinal
         private int _batteryCapacity;
 
         //Values to be used when getting data from sql
+        
         private readonly int id;
         private readonly string name;
         private readonly int price;
@@ -24,7 +24,7 @@ namespace ProjectFinal
         private readonly string use;
         private readonly string storagetype;
         private readonly string operatingsystem;
-
+   
         //Constructor when creating new computer and adding it to the database
         public Computer(
                 string _name,
@@ -45,7 +45,15 @@ namespace ProjectFinal
             BatteryCapacity = _batteryCapacity;
         }
         //Constructor which is used when taking data from the database
-        public Computer(int id, string name, int price, int storagesize, int batterycapacity, string use, string storagetype, string operatingsystem)
+        public Computer(
+            int id, 
+            string name, 
+            int price, 
+            int storagesize, 
+            int batterycapacity, 
+            string use, 
+            string storagetype, 
+            string operatingsystem)
         {
             this.id = id;
             this.name = name;
@@ -92,23 +100,22 @@ namespace ProjectFinal
             get { return _batteryCapacity; }
             set { _batteryCapacity = value; }
         }
-
         //Getters that are used when getting data from the database
         public string NameDB()
-        {return name; }
+        { return name; }
         public int PriceDB()
-        {return price; }
+        { return price; }
         public int StoragesizeDB()
-        {return storagesize; }
+        { return storagesize; }
         public int BatterycapacityDB()
         { return batterycapacity; }
         public string UseDB()
         { return use; }
         public string StoragetypeDB()
-        { return storagetype;}
+        { return storagetype; }
         public string OperatingsystemDB()
         { return operatingsystem; }
         public int IdDB()
-        {return id; }
+        { return id; }
     }
 }

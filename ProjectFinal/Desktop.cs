@@ -14,12 +14,19 @@ namespace ProjectFinal
                 int _batteryCapacity,
                 int _computerUse,
                 int _storageType,
-                int _os) :
-            base(_name, _price, _storageSize, _batteryCapacity, _computerUse, _storageType, _os)
+                int _os) : base(_name, _price, _storageSize, _batteryCapacity, _computerUse, _storageType, _os)
         {
         }
         //Constructor that is used when getting data from the database
-        public Desktop(int id, string name, int price, int storagesize, int batterycapacity, string use, string storagetype, string operatingsystem) : base(id, name, price, storagesize, batterycapacity, use, storagetype, operatingsystem)
+        public Desktop(
+            int id, 
+            string name, 
+            int price, 
+            int storagesize, 
+            int batterycapacity, 
+            string use, 
+            string storagetype, 
+            string operatingsystem) : base(id, name, price, storagesize, batterycapacity, use, storagetype, operatingsystem)
         {
         }
     }

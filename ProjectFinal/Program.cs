@@ -8,12 +8,13 @@ namespace ProjectFinal
     {
         static void Main(string[] args)
         {
-            //int input switch casen käyttöön
+            //Int input to be used on switch case
             int input;
-
             double aPrice;
-
-        
+            int aStorageSize;
+            int aComputerUse = 0;
+            int aStorageType = 0;
+            int aComputerOs = 0;
             //Start menu
             Console.WriteLine(" 1 - Add new Computer "); //OK
             Console.WriteLine(" 2 - Search a laptop "); //OK
@@ -30,24 +31,98 @@ namespace ProjectFinal
                     Console.WriteLine("Give name: ");
                     string aName = Console.ReadLine();
 
-                    Console.WriteLine("Give price: ");
-                    aPrice = double.Parse(Console.ReadLine());
-     
-                    Console.WriteLine("Storage size ");
-                    int aStorageSize = int.Parse(Console.ReadLine());
+                    do
+                    {
+                        while (true)
+                        {
+                            Console.WriteLine("Give price: ");
+                            try
+                            {
+                                aPrice = double.Parse(Console.ReadLine());
+                            }
+                            catch (FormatException ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                continue;
+                            }
+                            break;
+                        }
+                    } while (aPrice < 0);
 
-                    Console.WriteLine("Use of computer ");
-                    Methods.Use();
-                    int aComputerUse = int.Parse(Console.ReadLine());
+                    do
+                    {
+                        while (true)
+                        {
+                            Console.WriteLine("Storage size ");
+                            try
+                            {
+                                aStorageSize = int.Parse(Console.ReadLine());
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                continue;
+                            }
+                            break;
+                        }
+                    } while (aStorageSize < 0);
+                
+                    while (true)
+                    {
+                        Console.WriteLine("Computer use: ");
+                        Methods.Use();
+                        try
+                        {
+                            aComputerUse = int.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        if (aComputerUse >= 1 && aComputerUse < 4)
+                        {
+                            break;
+                        }
+                    }
 
-                    Console.WriteLine("Storage type: ");
-                    Methods.StorageType();
-                    int aStorageType = int.Parse(Console.ReadLine());
+                    while (true)
+                    {
+                        Console.WriteLine("Storage type: ");
+                        Methods.StorageType();
 
-                    Console.WriteLine("Operating system: ");
-                    Methods.OperatingSystem();
-                    int aComputerOs = int.Parse(Console.ReadLine());
- 
+                        try
+                        {
+                            aStorageType = int.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        if (aStorageType >= 1 && aStorageType < 4)
+                        {
+                            break;
+                        }
+                    }
+
+                    while (true)
+                    {
+                        Console.WriteLine("Operating system: ");
+                        Methods.OperatingSystem();
+
+                        try
+                        {
+                            aComputerOs = int.Parse(Console.ReadLine());
+                        }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        if (aComputerOs >= 1 && aComputerOs < 4)
+                        {
+                            break;
+                        }
+                    }
+
                     Console.WriteLine("Battery Capacity ");
                     int aBatteryCapacity = int.Parse(Console.ReadLine());
                     //Connecting to database
@@ -67,15 +142,15 @@ namespace ProjectFinal
                         Laptop computer = new Laptop(aName, aPrice, aStorageSize, aBatteryCapacity, aComputerUse, aStorageType, aComputerOs);
                         //Adding Desktop to database
                         SqlQuery.StoreToSql(computer);
-                    }
-                    break;
+                    }                 
+                break;
 
+                //Searching Laptop from the database
                 case 2:
-                    //Searching Laptop from the database
-                    Console.WriteLine("Tietokoneen käyttötarkoitus: ");
+                    Console.WriteLine("Computer use: ");
                     Methods.Use();
                     int use = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Budjetti: ");
+                    Console.WriteLine("Budget: ");
                     int budget = int.Parse(Console.ReadLine());
                     //Making connection to database
                     SqlQuery.Connection();
@@ -84,12 +159,12 @@ namespace ProjectFinal
 
                 break;
 
+                //Searching Desktop from the database
                 case 3:
-                    //Searching Desktop from the database
-                    Console.WriteLine("Tietokoneen käyttötarkoitus: ");
+                    Console.WriteLine("Computer use: ");
                     Methods.Use();
                     int Use = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Budjetti: ");
+                    Console.WriteLine("Budget: ");
                     int Budget = int.Parse(Console.ReadLine());
                     //Making connection to database
                     SqlQuery.Connection();
@@ -98,18 +173,27 @@ namespace ProjectFinal
 
                 break;
 
+                //Print every computer from the database
                 case 4:
                     //Connection to database
                     SqlQuery.Connection();
+
                     //Import laptops from the database
+                    Console.WriteLine();
+                    Console.WriteLine("All laptops in the database: ");
+                    Console.WriteLine();
                     SqlQuery.GetLaptops();
+
                     //Import desktops from the database
+                    Console.WriteLine();
+                    Console.WriteLine("All desktops in the database ");
+                    Console.WriteLine();
                     SqlQuery.GetDesktops();
                     break;
                 case 5:
                     //Exiting program 
                     Environment.Exit(0);
-                    break;
+                break;
             }
         }
 
