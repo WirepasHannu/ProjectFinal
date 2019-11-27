@@ -6,6 +6,14 @@ namespace ProjectFinal
 {
     class Program
     {
+        public Computer Computer
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         static void Main(string[] args)
         {
             //Array to store uses of the computer     
@@ -94,7 +102,6 @@ namespace ProjectFinal
                         {
                             aComputerUse = int.Parse(Console.ReadLine());
                         }
-
                         catch (FormatException ex)
                         {
                             Console.WriteLine(ex);

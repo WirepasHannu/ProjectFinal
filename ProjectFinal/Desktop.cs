@@ -19,13 +19,13 @@ namespace ProjectFinal
         }
         //Constructor that is used when getting data from the database
         public Desktop(
-            int id, 
-            string name, 
-            int price, 
-            int storagesize, 
-            int batterycapacity, 
-            string use, 
-            string storagetype, 
+            int id,
+            string name,
+            int price,
+            int storagesize,
+            int batterycapacity,
+            string use,
+            string storagetype,
             string operatingsystem) : base(id, name, price, storagesize, batterycapacity, use, storagetype, operatingsystem)
         {
         }

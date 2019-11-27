@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectFinal
 {
-    class SqlQuery
+    static class SqlQuery
     {
         // Connection to Database
         private const string HOST = "localhost";
