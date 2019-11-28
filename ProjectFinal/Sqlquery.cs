@@ -12,7 +12,7 @@ namespace ProjectFinal
         // Connection to Database
         private const string HOST = "localhost";
         private const string USERNAME = "postgres";
-        private const string PASSWORD = "rc86ezm5";
+        private const string PASSWORD = "---";
         private const string DB = "Computer";
         private const string CONNECTION_STRING = "Host=" + HOST + ";Username=" + USERNAME + ";Password=" + PASSWORD + ";Database=" + DB;
 
