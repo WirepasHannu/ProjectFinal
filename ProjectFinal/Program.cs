@@ -34,7 +34,7 @@ namespace ProjectFinal
             int aComputerOs = 0;
             int aBatteryCapacity;
             int use = 0;
-            int Use = 0;
+            int Use = 0; // Do not use only case differencing variable names, common source of accidents
             int budget;
             int Budget;
             bool loopBreak = true;
@@ -54,9 +54,24 @@ namespace ProjectFinal
             {
                 // Case1 : Adding new computer to database by user values
                 case 1:
-                   
+                   /** Put these to subfunctions. This method is very large and difficult to follow. 
+                       Common rule-of-thumb is that method should fit to a screen */
+                                      
                     Console.WriteLine("Give name: ");
                     string aName = Console.ReadLine();
+                    
+                    /** something like:
+                    private static string _givename()
+                    {
+                        Console.WriteLine("Give name: ");
+                        return Console.ReadLine();
+                    };
+                    
+                    And in this function:
+                    case 1:
+                         string aName = Program._givename();
+                    */
+                    
 
                         while (true)
                         {
@@ -74,8 +89,38 @@ namespace ProjectFinal
                             {
                                 break;
                             }
-
                         }
+                        /** And this to own subfunction as well
+                        private static int _getprice()
+                        {
+                            while (true)
+                            {
+                                int aStorageSize;
+                                Console.WriteLine("Storage size in gigabytes: ");
+                                Console.WriteLine("Max value is 10000");
+                                try
+                                {
+                                    aStorageSize = int.Parse(Console.ReadLine());
+                                }
+                                catch  (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                }
+                                if (aStorageSize > 0 && aStorageSize < 10001)
+                                {
+                                    return aStorageSize;
+                                }
+                            }
+                        }
+                        and now this 'main program' starts to look like:
+                    case 1:
+                         string aName = Program._givename();
+                         aStoragesize = Program._getprice();
+                         ...
+                         
+                         and same for other while(true) loops, easy to detach to own subfunctions
+                         */
+
 
                         while (true)
                         {
