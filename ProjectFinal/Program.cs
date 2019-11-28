@@ -338,16 +338,25 @@ namespace ProjectFinal
                         //Confirmation that user wants to delete computer, if input is y/Y -> Delete, else break
                         Console.WriteLine("Are you sure that you want to delete this computer? y/n");
                         ConsoleKeyInfo cnf = Console.ReadKey();
-                        if (cnf.Key.ToString() == "y" || cnf.Key.ToString() == "Y")
+                        while (true)
                         {
-                            SqlQuery.DeleteFromSql(id);
-                        }
-                        else
-                        {
-                            break;
-                        }
+                            try
+                            {
+                                if (cnf.Key.ToString() == "y" || cnf.Key.ToString() == "Y")
 
-                        break;
+                                {
+                                    SqlQuery.DeleteFromSql(id);
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+                        }
 
                     //Exiting program 
                     case 6:    
