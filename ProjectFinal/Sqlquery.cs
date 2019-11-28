@@ -22,6 +22,14 @@ namespace ProjectFinal
         static private NpgsqlCommand addComputer = null;
         static private NpgsqlCommand searchComputer = null;
 
+        internal static Program Program
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         //Connecting to the database
         public static void Connection()
         {
@@ -93,6 +101,8 @@ namespace ProjectFinal
                 return listLaptop;
             }
         }
+
+
         //Getting desktops from the database
         static public List<Desktop> GetDesktops()
         {
@@ -109,6 +119,8 @@ namespace ProjectFinal
                         Console.WriteLine($" {computers.GetInt16(0)} {computers.GetString(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetInt32(4)} {computers.GetString(5)} {computers.GetString(6)} {computers.GetString(7)}");
                     }
                 return listDesktop;
+
+
             }
         }  
     }

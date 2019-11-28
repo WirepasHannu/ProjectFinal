@@ -3,29 +3,26 @@
   <Class Name="ProjectFinal.Program" Collapsed="true">
     <Position X="9.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Computer" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="ProjectFinal.Computer" Collapsed="true">
-    <Position X="7.25" Y="1.75" Width="1.5" />
+    <Position X="9.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AwABJMAARQAAAAgAQAAAAAQBAAGFEUAABACEAEAQAgA=</HashCode>
       <FileName>Computer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectFinal.Desktop" Collapsed="true">
-    <Position X="4.75" Y="3" Width="1.5" />
+    <Position X="6.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Desktop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ProjectFinal.Laptop" Collapsed="true">
-    <Position X="4.75" Y="1.75" Width="1.5" />
+    <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Laptop.cs</FileName>
@@ -34,9 +31,12 @@
   <Class Name="ProjectFinal.SqlQuery" Collapsed="true">
     <Position X="11" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ggAAQAAIAAAEAAUCAAABAACAAAAQAIIAAQAAAAAEABA=</HashCode>
+      <HashCode>ggAAQQAIAAAEAAUCAAABAACAAAAQAIIAAQAAAAAEABA=</HashCode>
       <FileName>Sqlquery.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Program" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

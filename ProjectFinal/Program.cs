@@ -6,14 +6,6 @@ namespace ProjectFinal
 {
     class Program
     {
-        public Computer Computer
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         static void Main(string[] args)
         {
             //Array to store uses of the computer     
@@ -26,8 +18,8 @@ namespace ProjectFinal
             //Int input to be used on switch case
             int input;
 
-            double aPrice;
-            int aStorageSize;
+            double aPrice = 0;
+            int aStorageSize = 0;
             int aComputerUse = 0;
             int aStorageType = 0;
             int aComputerOs = 0;
@@ -36,7 +28,10 @@ namespace ProjectFinal
             int Use = 0;
             int budget;
             int Budget;
+            bool loopBreak = true;
 
+            //While loop to run program until user selects "5 - quit"
+            while (loopBreak == true) {
             //Start menu
             Console.WriteLine(" 1 - Add new Computer "); //OK
             Console.WriteLine(" 2 - Search a laptop "); //OK
@@ -53,42 +48,44 @@ namespace ProjectFinal
                     Console.WriteLine("Give name: ");
                     string aName = Console.ReadLine();
 
-                    do
-                    {
                         while (true)
                         {
-                            Console.WriteLine("Give price: ");
+                            Console.WriteLine("Give price in euros: ");
+                            Console.WriteLine("Max price is 50000");
                             try
                             {
                                 aPrice = double.Parse(Console.ReadLine());
                             }
-                            catch (FormatException ex)
+                            catch (Exception ex)
                             {
                                 Console.WriteLine(ex.Message);
-                                continue;
                             }
-                            break;
-                        }
-                    } while (aPrice < 0);
+                            if (aPrice > 0 && aPrice < 50000)
+                            {
+                                break;
+                            }
 
-                    do
-                    {
+                        }
+
                         while (true)
                         {
                             Console.WriteLine("Storage size in gigabytes: ");
+                            Console.WriteLine("Max value is 10000");
                             try
                             {
                                 aStorageSize = int.Parse(Console.ReadLine());
                             }
-                            catch (Exception ex)
+                            catch  (Exception ex)
                             {
                                 Console.WriteLine(ex.Message);
-                                continue;
                             }
-                            break;
+                            if (aStorageSize > 0 && aStorageSize < 10001)
+                            {
+                                break;
+                            }
+                        
                         }
-                    } while (aStorageSize < 0);
-                
+
                     while (true)
                     {
                         Console.WriteLine("Computer use: ");
@@ -112,7 +109,7 @@ namespace ProjectFinal
                           break;
                         }
                     }
-
+                    
                     while (true)
                     {
                         Console.WriteLine("Storage type: ");
@@ -320,9 +317,11 @@ namespace ProjectFinal
 
                     break;
                 case 5:
-                    //Exiting program 
-                    Environment.Exit(0);
+                        //Exiting program 
+                        loopBreak = false;
+  
                 break;
+            }
             }
         }
     }
