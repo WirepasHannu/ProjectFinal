@@ -16,6 +16,7 @@ namespace ProjectFinal
 
         static void Main(string[] args)
         {
+            //
             //Array to store uses of the computer     
             string[] uses = new string[] { "1 - Business", "2 - Editing", "3 - Basic", "4 - Gaming" };
             //Array to store different storagetypes
