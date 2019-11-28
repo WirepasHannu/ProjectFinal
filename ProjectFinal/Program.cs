@@ -6,6 +6,14 @@ namespace ProjectFinal
 {
     class Program
     {
+        public Computer Computer
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         static void Main(string[] args)
         {
             //Array to store uses of the computer     
@@ -33,11 +41,12 @@ namespace ProjectFinal
             //While loop to run program until user selects "5 - quit"
             while (loopBreak == true) {
             //Start menu
-            Console.WriteLine(" 1 - Add new Computer "); //OK
-            Console.WriteLine(" 2 - Search a laptop "); //OK
-            Console.WriteLine(" 3 - Search a desktop "); //OK
-            Console.WriteLine(" 4 - Show a list of all computers "); //OK
-            Console.WriteLine(" 5 - Quit "); //OK
+            Console.WriteLine(" 1 - Add new Computer "); 
+            Console.WriteLine(" 2 - Search a laptop "); 
+            Console.WriteLine(" 3 - Search a desktop "); 
+            Console.WriteLine(" 4 - Show a list of all computers ");
+            Console.WriteLine(" 5 - Delete computer from the database");
+            Console.WriteLine(" 6 - Quit "); 
             input = int.Parse(Console.ReadLine());
 
             switch (input)
@@ -316,8 +325,31 @@ namespace ProjectFinal
                     SqlQuery.GetDesktops();
 
                     break;
-                case 5:
-                        //Exiting program 
+                    //Delete computer from the sql
+                    case 5:
+                        //First we print all the computers
+                        SqlQuery.Connection();
+                        SqlQuery.GetDesktops();
+                        SqlQuery.GetLaptops();
+                        //Ask user which computer they want to delete, user must enter ID in numbers
+                        Console.WriteLine("Insert the id which one you want to delete. ");
+                        int id = int.Parse(Console.ReadLine());
+                        //Confirmation that user wants to delete computer, if input is y/Y -> Delete, else break
+                        Console.WriteLine("Are you sure that you want to delete this computer? y/n");
+                        ConsoleKeyInfo cnf = Console.ReadKey();
+                        if (cnf.Key.ToString() == "y" || cnf.Key.ToString() == "Y")
+                        {
+                            SqlQuery.DeleteFromSql(id);
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+                        break;
+
+                    //Exiting program 
+                    case 6:    
                         loopBreak = false;
   
                 break;

@@ -21,6 +21,7 @@ namespace ProjectFinal
         static private NpgsqlCommand GetAllDesktops = null;
         static private NpgsqlCommand addComputer = null;
         static private NpgsqlCommand searchComputer = null;
+        static private NpgsqlCommand deleteComputer = null;
 
         internal static Program Program
         {
@@ -68,6 +69,16 @@ namespace ProjectFinal
                     Console.WriteLine($" {searchresult.GetInt16(0)} {searchresult.GetString(1)} {searchresult.GetInt32(2)} {searchresult.GetInt32(3)} {searchresult.GetInt32(4)} {searchresult.GetString(5)} {searchresult.GetString(6)} {searchresult.GetString(7)}");
                 }
             } 
+        }
+
+        //Deleting computer from the database
+        public static void DeleteFromSql(int id)
+        {
+            using (deleteComputer = new NpgsqlCommand($"DELETE FROM computer WHERE ID ='{id}';", connection))
+            {
+                deleteComputer.Prepare();
+                using NpgsqlDataReader npgsql = deleteComputer.ExecuteReader();
+            }
         }
         //Searching Desktop from the database
         public static void GetFromsqlDesktop(int Use, int Budget)
@@ -119,9 +130,7 @@ namespace ProjectFinal
                         Console.WriteLine($" {computers.GetInt16(0)} {computers.GetString(1)} {computers.GetInt32(2)} {computers.GetInt32(3)} {computers.GetInt32(4)} {computers.GetString(5)} {computers.GetString(6)} {computers.GetString(7)}");
                     }
                 return listDesktop;
-
-
             }
-        }  
+        }
     }
 }

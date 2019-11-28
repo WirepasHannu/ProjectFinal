@@ -3,9 +3,12 @@
   <Class Name="ProjectFinal.Program" Collapsed="true">
     <Position X="9.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Computer" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="ProjectFinal.Computer" Collapsed="true">
     <Position X="9.5" Y="1.75" Width="1.5" />
