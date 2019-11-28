@@ -333,7 +333,7 @@ namespace ProjectFinal
                         SqlQuery.GetDesktops();
                         SqlQuery.GetLaptops();
                         //Ask user which computer they want to delete, user must enter ID in numbers
-                        Console.WriteLine("Insert the id which one you want to delete. ");
+                        Console.WriteLine("Give id of the computer you want to delete: ");
                         int id = int.Parse(Console.ReadLine());
                         //Confirmation that user wants to delete computer, if input is y/Y -> Delete, else break
                         Console.WriteLine("Are you sure that you want to delete this computer? y/n");
@@ -364,7 +364,7 @@ namespace ProjectFinal
   
                 break;
             }
-            }
+          }
         }
     }
 }
