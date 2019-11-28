@@ -15,16 +15,35 @@ namespace ProjectFinal
         private int _batteryCapacity;
 
         //Values to be used when getting data from sql
+        /** You don't need separate values for these, at least for duplicate items. Use values above directly? */
         
         private readonly int id;
         private readonly string name;
-        private readonly int price;
+        private readonly int price; /** Set value directly to _price? */
         private readonly int storagesize;
         private readonly int batterycapacity;
         private readonly string use;
+        /** You have this and _computerUse representing same item. Use only either one */
+        
         private readonly string storagetype;
         private readonly string operatingsystem;
    
+        /* You could create private 'base constructor for common values'
+        private Computer(
+            string name,
+            double price,
+            int storageSize,
+            int batterycapacity,
+            ) 
+        {
+        ... here, initialize common members, like:
+            this.name=name;
+            this.price=price;
+            ...
+        }
+        */
+            
+        
         //Constructor when creating new computer and adding it to the database
         public Computer(
                 string _name,
@@ -35,6 +54,8 @@ namespace ProjectFinal
                 int _storageType,
                 int _os
                 )
+        /* And use here the 'base constructor:
+        : this(_name, _price, _storageSize, _batteryCapacity) */
         {
             Name = _name;
             Price = _price;
@@ -55,7 +76,7 @@ namespace ProjectFinal
             string storagetype, 
             string operatingsystem)
         {
-            this.id = id;
+            this.id = id; 
             this.name = name;
             this.price = price;
             this.storagesize = storagesize;
